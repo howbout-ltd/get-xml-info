@@ -28,7 +28,10 @@ try {
       if (nodes.length) {
         var output = [];
         for (var i = 0; i < nodes.length; i++) {
-          output.push(nodes[i].firstChild.data);
+          if (nodes[i].hasChildNodes())
+            output.push(nodes[i].firstChild.data || nodes[i].firstChild.value);
+          else
+            output.push(nodes[i].data || nodes[i].value);
         }
         core.setOutput('info', output);
         console.log(`Output: ${output}`);
